@@ -1,0 +1,11 @@
+1° passo - instalar o php na maquina local ( baixar e descompactar em C:\PHP )
+2° passo -  habiliatr o php nas variaveis de ambiente(PATH)
+3° passo - instalart o composer ( administrador de dependencia ) getcomposer.get
+4° passo - editar as dependencias (c:\php\php.init) - descomentar as linhas :
+		-extension=pdo_pgsql
+		-extension=pgsql
+5° passo - baixar as extensões no vs code, php debug , e php intelephense
+6° passo - desabilitar o php nativo do VSCODE	
+		Desabilitar Recursos da linguagem PHP, @builtin php
+7° criar uma Workspace ( uma pasta para guardar os projetos em PHP)
+
