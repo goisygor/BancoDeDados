@@ -17,6 +17,7 @@ if (empty($_SESSION)) {
     header("Location: index.php?msgErro=Você precisa se autenticar no sistema.");
     die();
 }
+//Criação da tabela pelo banco de dados
 $anuncios = array();
 if (!empty($_GET['meus_anuncios']) && $_GET['meus_anuncios'] == 1) {
     // Obter somente os anúncios cadastrados pelo(a) usuário(a) logado(a).
@@ -52,6 +53,33 @@ if (!empty($_GET['meus_anuncios']) && $_GET['meus_anuncios'] == 1) {
 <body>
 
 
+
+    <div class="container">
+        <?php if (!empty($_GET['msgErro'])) { ?>
+            <div class="alert alert-warning" role="alert">
+                <?php echo $_GET['msgErro']; ?>
+            </div>
+        <?php } ?>
+        <?php if (!empty($_GET['msgSucesso'])) { ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo $_GET['msgSucesso']; ?>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="container">
+        <div class="col-md-11">
+
+            <h2 class="title">Olá <i><?php echo $_SESSION['nome']; ?></i>, seja bem-
+                vindo(a)!</h2>
+
+        </div>
+    </div>
+    <div class="container">
+        <a href="cad_anuncio.php" class="btn btn-primary">Novo Anúncio</a>
+        <a href="index_logado.php?meus_anuncios=1" class="btn btn-success">Meus Anúncios</a>
+        <a href="index_logado.php?meus_anuncios=0" class="btn btn-info">Todos Anúncios</a>
+        <a href="logout.php" class="btn btn-dark">Sair</a>
+    </div>
     <?php if (!empty($anuncios)) { ?>
         <!-- Aqui que será montada a tabela com a relação de anúncios!! -->
         <div class="container">
@@ -83,7 +111,7 @@ if (!empty($_GET['meus_anuncios']) && $_GET['meus_anuncios'] == 1) {
                             <td><?php echo $a['tipo'] == 'G' ? "Gato" : "Cachorro"; ?></td>
                             <td><?php echo $a['pelagem_cor']; ?></td>
                             <td><?php echo $a['raca']; ?></td>
-                            <td><?php echo $a['sexo'] == 'M' ? "Macho" : "Fêmea"; ?></td>
+                            <td><?php echo $a['sexo'] == 'M' ? "Macho" : "Fêmea"; ?></td> <!--(? Operador ternario é com se fosse um IF else de uma unica linha)!-->
                             <td>
                                 <?php if ($a['email_usuario'] == $_SESSION['email']) { ?>
                                     <a href="alt_anuncio.php?id_anuncio=<?php echo $a['id']; ?>" class="btn btn-warning">Alterar</a>
@@ -97,33 +125,7 @@ if (!empty($_GET['meus_anuncios']) && $_GET['meus_anuncios'] == 1) {
             </table>
         </div>
     <?php } ?>
-    <div class="container">
-        <?php if (!empty($_GET['msgErro'])) { ?>
-            <div class="alert alert-warning" role="alert">
-                <?php echo $_GET['msgErro']; ?>
-            </div>
-        <?php } ?>
-        <?php if (!empty($_GET['msgSucesso'])) { ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $_GET['msgSucesso']; ?>
-            </div>
-        <?php } ?>
-    </div>
-    <div class="container">
-        <div class="col-md-11">
 
-            <h2 class="title">Olá <i><?php echo $_SESSION['nome']; ?></i>, seja bem-
-                vindo(a)!</h2>
-
-        </div>
-    </div>
-    <div class="container">
-        <a href="cad_anuncio.php" class="btn btn-primary">Novo Anúncio</a>
-        <a href="index_logado.php?meus_anuncios=1" class="btn btn-success">Meus Anúncios</a>
-        <a href="index_logado.php?meus_anuncios=0" class="btn btn-info">Todos Anúncios</a>
-        <a href="logout.php" class="btn btn-dark">Sair</a>
-    </div>
 </body>
-
 
 </html>
